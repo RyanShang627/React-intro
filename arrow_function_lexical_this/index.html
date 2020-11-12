@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrow Function and Lexical this</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js"></script>   
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        // Arrow function: "=>"
+        const arr = [10, 20, 30]
+        const newArr = arr.map(item => item * 3);
+        console.log(newArr);
+
+        const person = {
+            name: 'John',
+            likes: ['apple', 'banana', 'orange'],
+            sayName: function () {
+                console.log(`My name is ${this.name}`);
+            },
+            sayName1() {
+                console.log(`My name is ${this.name}`);
+            },
+            sayLikes() {
+                this.likes.forEach(function (like) {
+                console.log(`${this.name} like ${like}`);
+                });
+            },
+            sayLikes1() {
+                let self = this;
+                this.likes.forEach(function (like) {
+                console.log(`${self.name} like ${like}`);
+                });
+            },
+            // automatically helps binding "this" context
+            sayLikes2() {
+                this.likes.forEach((like) => {
+                console.log(`${this.name} like ${like}`);
+                });
+            },
+        };
+
+        person.sayName();
+        person.sayName1();
+        person.sayLikes();
+        person.sayLikes1();
+        person.sayLikes2();
+    </script>
+</body>
+</html>
