@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Object Properties</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js"></script>   
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        function getCar(make, model, price) {
+            return {
+                make: make,
+                model: model,
+                price: price,
+            };
+        }
+        console.log(getCar('BMW', 'X5', 60000));
+
+        function getCar2(make, model, price) {
+            return {
+                make,
+                model,
+                price,
+            };
+        }
+        console.log(getCar2('BMW', 'X5', 60000));
+
+        function getCar3(make, model, price) {
+            return {
+                make,
+                model,
+                price,
+                [`madeBy${make}`]: true,
+            };
+        }
+        console.log(getCar3('BMW', 'X5', 60000));
+
+        function getCar4(make, model, price) {
+            return {
+                make,
+                model,
+                price,
+                [`madeBy${make}`]: true,
+                depreciate() { this.price -= 1000; }
+            };
+        }
+        
+        const car = getCar4('BMW', 'X5', 60000)
+        car.depreciate();
+        console.log(car);
+
+        const keyName = 'name';
+        const o = {
+            a: 1,
+            b: 2,
+            [keyName]: 'richard',
+            myfunc() {
+                console.log('haha');
+            }
+        };
+        console.log(o.myfunc());
+    </script>
+</body>
+</html>
