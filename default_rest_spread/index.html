@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Default Rest Spread Operator</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js"></script>   
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        // default parameter
+        function f(x, y=12) {
+            return x + y;
+        }
+        console.log(f(3)); // 15
+        console.log(f(3, 5)); // 8
+        console.log(f(3, undefined)); // 15. 相当于第二个参数没有定义
+
+        // rest parameter
+        // y拿到了所有的剩下来的，组成一个array
+        function rest(x, ...y) {
+            console.log(x);
+            console.log(y);
+        }
+        rest(1, 2, 3, 4, 5); // 1, [2,3,4,5]
+
+        // z代表the rest of the parameters
+        // z这个array包含所有传入的多出来的参数
+        function rest1(x, y, ...z) {
+            console.log(x);
+            console.log(y);
+            console.log(z);
+        }
+        rest1(1, 2, 3, 4, 5); // 1, 2, [3,4,5]
+
+        // Spread Operator
+        // spread array example 1
+        const arr1 = [1, 2, 3];
+        const arr2 = [4, 5, 6];
+        const arr = [...arr1, ...arr2];
+        console.log(arr); // [1, 2, 3, 4, 5, 6]
+
+        // spread array example 2
+        const arr3 = [1, 2, 3, 4];
+        const arr4 = [5, 6, 7, 8];
+        const arr5 = [...arr3, 111, 222, ...arr4]; // [1, 2, 3, 4, 111, 222, 5, 6, 7, 8
+        console.log(arr5);
+
+        // spread object
+        const desc1 = {
+            name: 'richard',
+            age: 20,
+        }
+
+        const desc2 = {
+            job: 'software engineer',
+            from: 'china',
+        }
+        const person = {...desc1, ...desc2, other: 'other'};
+        console.log(person);
+
+        // pass each elem of array as argument
+        const f1 = function(x, y, z) {
+            return x + y + z;
+        };
+        const array = [1, 2, 3];
+        console.log(f1(...array)); // 6
+        console.log(f1(...[1,2,3])) // 6
+    </script>
+</body>
+</html>
