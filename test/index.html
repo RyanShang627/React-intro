@@ -11,7 +11,41 @@
 <body>
  <div id="root"></div>
  <script type="text/babel">
-   // ES6 / React / JSX code from here
+
+ // var is function scoped
+ function ex1_var() {
+    if (true) {
+        var a = 2;
+    }
+    console.log(a); // 2
+ }
+
+// let is block scoped and can be modified
+function ex1_let() {
+ if (true) {
+   let a = 2;
+ }
+ console.log(a); // undefined
+}
+
+// const is block scoped and cannot be modified
+function ex1_const() {
+    const a = 2;
+    console.log(a);
+}
+
+function ex2_var() {
+    for (var i = 0; i < 10; i++) {
+        console.log("haha");
+    }
+    console.log(i); // 10
+}
+
+function ex3() {
+    const a = 1;
+    a = 2; // error: a is read-only
+}
+
  </script>
 </body>
 </html>
